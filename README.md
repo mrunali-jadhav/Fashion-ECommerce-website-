@@ -13,4 +13,4 @@
 ![About Page](About.png)
 
 ### Contact Page
-![Contact Page](Contact.png.png)
+![Contact Page](Contact.png)
