@@ -3,11 +3,27 @@ export function Hero() {
     <section className="hero">
       <div className="hero-content">
         <h1>Discover Your Perfect Style</h1>
-
+         <a href="/add-product">
+  <button
+    style={{
+      padding: "12px 24px",
+      backgroundColor: "#000",
+      color: "#fff",
+      border: "none",
+      borderRadius: "8px",
+      fontSize: "16px",
+      cursor: "pointer",
+      marginTop: "20px"
+    }}
+  >
+    Add Product
+  </button>
+</a>
         <p>
           Elevate your wardrobe with our latest fashion
           collections designed for every occasion.
         </p>
+
 
         <button>Explore Collection</button>
       </div>
