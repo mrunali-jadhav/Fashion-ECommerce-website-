@@ -1,40 +1,52 @@
-import { BestSellers } from "../components/BestSellers.jsx";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabase";
+import { BestSellers } from "../Components/BestSellers.jsx";
 
-export function Shop({ products }) {
+export function Shop() {
+  const [products, setProducts] = useState([]);
+
+  async function fetchProducts() {
+    const { data } = await supabase
+      .from("products")
+      .select("*");
+
+    setProducts(data);
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Our Fashion Collection</h1>
 
       <BestSellers />
 
-      <h2 style={{ marginTop: "40px" }}>Newly Added Products</h2>
+      <h2 style={{ marginTop: "40px" }}>
+        Products Added by Admin
+      </h2>
 
-      {products.length === 0 ? (
-        <p>No products added yet.</p>
-      ) : (
-        products.map((product, index) => (
-          <div
-            key={index}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "15px",
-              marginBottom: "20px",
-              backgroundColor: "#fff"
-            }}
-          >
-            
+      {products.map((product) => (
+        <div
+          key={product.id}
+          style={{
+            border: "1px solid #ddd",
+            padding: "15px",
+            marginBottom: "15px",
+            borderRadius: "10px",
+            backgroundColor: "#fff",
+          }}
+        >
+          <h3>{product.title}</h3>
 
-            <h3>{product.title}</h3>
+          <p>{product.details}</p>
 
-            <p>{product.details}</p>
-
-            <p>
-              <strong>Price:</strong> ₹{product.price}
-            </p>
-          </div>
-        ))
-      )}
+          <p>
+            <strong>Price:</strong> ₹{product.price}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
